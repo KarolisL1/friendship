@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship</title>
+</head>
+<body>
+    <h1>Friendship</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Friendship</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for user, friend in friendship.items() %}
+        <tr>
+            <th>{{user.first_name}} {{user.last_name}}</th>
+            <th>{{friend.first_name}} {{friend.last_name}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Add User</h2>
+    <form action="/add_user" method="post">
+    First Name: <input type="text" name="first_name" />
+    Last Name: <input type="text" name="last_name" />
+    <input type="submit" value="Add User" />
+    </form>
+    <h2>Create Friendship</h2>
+    <form action="/create_friendship" method="post">
+        User: <select name="user_id">
+            {% for user in users %}
+                <option value="{{user.id}}">{{ user.first_name }} {{ user.last_name }}</option>
+            {% endfor %}
+        </select>
+        Friend: <select name="friend_id">
+            {% for user in users %}
+            <option value="{{user.id}}">{{ user.first_name }} {{ user.last_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>
